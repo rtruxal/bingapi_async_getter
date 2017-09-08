@@ -1,0 +1,4 @@
+python >= 3.5
+aiohttp >= 2.0.0
+requests >= 2.8.0
+async_timeout
