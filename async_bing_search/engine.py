@@ -10,9 +10,20 @@ from .InputSanitizer import InputSanitizer
 
 
 
+
+
 class AsyncRequester(object):
     def __init__(self, api_key, *, endpoint_type='web', alt_header_dict=None, alt_url_param_dict=None, loop=None):
         super(AsyncRequester, self).__init__()
+        self._query = None
+        self._api_key = None
+
+        # for clarity:
+        self._loop = None
+        self._headers = None
+        self._params = None
+        self._search_type = None
+
 
         if not loop:
             self._loop = asyncio.get_event_loop()
@@ -36,9 +47,13 @@ async def fetch(session, url):
         async with session.get(url) as resp:
             return await resp.text()
 
-async def init_session(urls=None):
+
+
+def init_session(urls=None):
     if not urls:
         _urls = ['https://httpbin.org/{}'.format(i) for i in ['ip', 'user-agent', 'headers', 'encoding/utf8']]
     else:
         _urls = urls
 
+if __name__ == "__main__":
+    pass
