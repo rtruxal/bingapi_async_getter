@@ -33,7 +33,7 @@ class DefaultHeaders(OrderedDict):
         if loop:
             asyncio.ensure_future(self._clean_coro(), loop=loop)
         else:
-            self = self._clean2()
+            self._clean()
 
     def _clean(self):
         """same as below but not for runtime-execution."""
@@ -41,7 +41,7 @@ class DefaultHeaders(OrderedDict):
         for k, v in _iter_this:
             if k in ('count', 'offset'):
                 pass
-            if not v: del self[k]
+            elif not v: del self[k]
 
     def _clean2(self):
         new = DefaultHeaders(clean=True)
